@@ -67,7 +67,7 @@ def main(_):
       learning_rate=FLAGS.learning_rate,
       net_assignments=net_assignments,
       second_derivatives=FLAGS.second_derivatives)
-  step, update, reset, cost_op, _ = minimize
+  step, loss_op, update, reset, cost_op, _ = minimize
 
   with ms.MonitoredSession() as sess:
     # Prevent accidental changes to the graph.
@@ -78,7 +78,7 @@ def main(_):
     total_cost = 0
     for e in xrange(FLAGS.num_epochs):
       # Training.
-      time, cost = util.run_epoch(sess, cost_op, [update, step], reset,
+      time, cost = util.run_epoch(sess, loss_op, [update, step], reset,
                                   num_unrolls)
       total_time += time
       total_cost += cost

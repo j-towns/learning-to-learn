@@ -399,4 +399,4 @@ class MetaOptimizer(object):
     info = self.meta_loss(make_loss, len_unroll, **kwargs)
     optimizer = tf.train.AdamOptimizer(learning_rate)
     step = optimizer.minimize(info.loss)
-    return MetaStep(step, *info[1:])
+    return (step,) + info
